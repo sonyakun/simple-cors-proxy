@@ -1,5 +1,6 @@
 import { Hono } from 'hono';
 import { cache } from 'hono/cache';
+import { runtime } from "std-env";
 
 import ky from 'ky';
 
@@ -10,6 +11,7 @@ app.get(
   cache({
     cacheName: 'simple-cors-proxy',
     cacheControl: 'max-age=300',
+    wait: runtime === "deno" || undefined
   })
 )
 
